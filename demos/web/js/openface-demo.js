@@ -236,12 +236,13 @@ function umSuccess(stream) {
     if (vid.mozCaptureStream) {
         vid.mozSrcObject = stream;
     } else {
-        vid.srcObject = stream;
+        vid.src = (window.URL && window.URL.createObjectURL(stream)) ||
+            stream;
     }
     vid.play();
     vidReady = true;
     sendFrameLoop();
-} 
+}
 
 function addPersonCallback(el) {
     defaultPerson = people.length;
